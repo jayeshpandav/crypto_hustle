@@ -8,7 +8,8 @@ import { Line } from "react-chartjs-2";
 
 const CoinInfo = ({ coin }) => {
   const [historicalData, setHistoricalData] = useState();
-  const [days, setDays] = useState(1);
+  // const [days, setDays] = useState(1);
+  let days = 1; //temporary
 
   const { currency } = CryptoState();
 
@@ -60,10 +61,12 @@ const CoinInfo = ({ coin }) => {
               return days === 1 ? time : date.toLocaleDateString();
             }),
 
-            datasets: [{ 
-              data: historicalData.map((coin) => coin[1]),
-              label: '' 
-            }],
+            datasets: [
+              {
+                data: historicalData.map((coin) => coin[1]),
+                label: "",
+              },
+            ],
           }}
         />
       )}
