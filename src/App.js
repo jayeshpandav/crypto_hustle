@@ -1,24 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Header from "./components/Header";
+import Homepage from "./Pages/Homepage";
+import Coinpage from "./Pages/Coinpage";
+import { ThemeProvider } from "@emotion/react";
+import { createTheme } from "@mui/material";
+
+const styles = {
+  App: {
+    // flex: 1,
+    backgroundColor: "#14161a",
+    color: "#fff",
+    minHeight: "100vh",
+  },
+};
+
+const darkTheme = createTheme({
+  palette: {
+    primary: {
+      main: "#fff",
+    },
+    mode: "dark",
+  },
+});
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={darkTheme}>
+      <Router>
+        <div style={styles.App}>
+          <Header />
+          <Routes>
+            <Route path="/" element={<Homepage />} exact />
+            <Route path="/coins/:id" element={<Coinpage />} exact />
+          </Routes>
+        </div>
+      </Router>
+    </ThemeProvider>
   );
 }
 
